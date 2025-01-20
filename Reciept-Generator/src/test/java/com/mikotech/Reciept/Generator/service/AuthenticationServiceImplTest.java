@@ -2,6 +2,7 @@ package com.mikotech.Reciept.Generator.service;
 
 import com.mikotech.Reciept.Generator.data.modal.Role;
 import com.mikotech.Reciept.Generator.data.repo.UserRepo;
+import com.mikotech.Reciept.Generator.dto.request.AuthenticationRequest;
 import com.mikotech.Reciept.Generator.dto.request.RegisterRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,16 @@ class AuthenticationServiceImplTest {
         request.setUsername("ogbechiemicheal@gmail.com");
         authenticationService.register(request);
         assertEquals(1, userRepo.count());
+    }
+
+    @Test
+    public  void testToLogin(){
+        AuthenticationRequest request = new AuthenticationRequest();
+        request.setUsername("ogbechiemicheal@gmail.com");
+        request.setPassword("mikolo");
+        var response = authenticationService.authenticate(request);
+        System.out.println(response.getToken());
+        assertNotNull(response.getToken());
     }
 
 }
